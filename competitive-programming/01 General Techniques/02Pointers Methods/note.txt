@@ -1,0 +1,75 @@
+Pointers method: Efficient navigation of arrays (essentially a counting problem that counts the number of good (i,j) pair in the array)
+
+1. One array:
+    -The array must have a boolean 'goodness_property' that says yes or no well-defined as a function of two indexes
+            property(i,j) = yes or no? (note property is of array not just the index values i and j)
+    -Goal is to count such indexes
+            :result = 0
+            :result += over all (i,j): property(i,j) [tip: if a (i,j) is good then every (i,j) in it is good]
+    -Could be also to bring best out of them 
+            :result = worst assumption
+            :result = best_func(over all (i,j): property(i,j))
+            best is not necessarily the best of the property but could be another value itself
+           
+    -One exhaustive solution is to iterate over all the permuatation O(N^2)
+
+    -O(N) method:
+        -Have two pointers, which moving one will (try to) take us closer to goodness, moving another will (try to) take us far from goodness
+        -So we deliberately alternate between goodness and badness zone (convince you that this gives correct result)
+        -Sometimes sorting is necessary to allow this altering pointers behaviour
+
+    -The indices can either start at same left ends or opposite ends
+    OPPOSITE FRAMEWORK:
+    1. moving left = increase good, moving right = decrease bad
+        left = 0, right = n-1;
+        property parameter initialization;
+        while(left < right):
+            update the property parameter;
+            if (property is good):
+                update the result
+                left++
+            else
+                right-- 
+
+    1. moving left = decreases good, moving right = increases bad
+        left = 0, right = n-1;
+        property parameter initialization;
+        while(left < right):
+            update the property parameter;
+            if (property is good):
+                update the result
+                right--
+            else 
+                left++
+
+    SAME FRAMEWORK:
+    1. moving left = increase good, moving right = decrease bad
+        left = 0
+        property parameter initialization;
+        for right = 0 to n-1:
+            update property paramter;
+            while (property is not good): 
+                //we are in bad zone
+                update the property paramter
+                left++
+            //now we are in good zone:
+            update the result
+
+    2. moving left = decrease bad, moving right = increase good
+        left = 0
+        property paramter initialization
+        for right = 0 to n-1:
+            update property parmater;
+            while (propery is good):
+                //we are in good zone
+                update the result
+                update the property paramter
+                left++
+
+    Some different cases:
+        in some cases it could be that which pointer to change is not fixed before but depends on inside the loop; this happens when we are in goodness region whole time; and need to find best of them 
+
+
+TYPICAL PROBLEMS:
+    -Something involving pair of elements in an array
+    -Something to do with subsegmenet of the array

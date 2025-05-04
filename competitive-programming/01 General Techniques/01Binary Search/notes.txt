@@ -1,0 +1,74 @@
+Given an array which elements are either true on goodness or false, BS finds the last true elements (a search problem at its heart)
+
+1. When size of the array is fixed:
+
+    -Need a search space that satisfies the criteria of booleaness   
+    -Need two pointers, one will always point to true elements and another will always point to falses (invariant at all times)
+    -Hence need to have at least one good and at least one false
+    -If not sure (possibility of all the array being good or bad) then assume two virtual elements at -1 and n which are always true and false (not actually there but assumed)
+
+    FRAMEWORK: O(N*calculate goodness)
+
+    left = good (maybe -1)
+    right = bad (maybe n)
+    while (left+1 < right)      //continue until they are adjacent to each other
+        mid = (left+right)/2
+        if (mid is true) left = mid; // maintain the invariant
+        else right = mid
+
+    -At the end, left and right will be such that they will point to true and false that touch each other (last true and first false)
+
+2. When size of array is not there (it could not be array but a sequence of true and falses)
+
+    -Must have at least one true and one false (rest is same)
+
+TYPICAL PROBLEMS:
+1. work, does not
+    -To search minimum value in integer number line that corresponds to dont dont dont ... dont works works works
+    -Must know:
+        -function(value on integer number line) = works or dont (must know this function)
+        -Initial 'dont', then somewhere at the last need to know one of 'works'
+
+2. real search
+    -To search some value in real line where each value corresponds as dont dont dont ... dont work works ...
+
+    left = good
+    right = bad
+    for t from 1 to 100:    //100 is for precision purpose could be anything in relation to precision
+        mid = (left+right)/2
+        if (mid is good) left = mid;
+        else right = mid;
+
+3. finding minima can be rephrased as a binary search problem
+    -Let f(x) be a function whose minima is to find, then define
+            bool(t) = true if f(x) <= t for any value of x else false [visualize graph always]
+    -Our minimum value is the minimum possible value of t (so what? its just rephrasing from x to t)
+    -The difference is bool(t) is monotonic, goes like false false false ... false true true true true ...
+    -The first true in that line is our answer
+
+    Problem is that finding whether for a value of t, f(x) <= t for any values of x is a struggle itself
+
+4. classical max min problem:
+    -time(x) = max|xi-x|/vi where xi are the coordinates and vi is the velocity
+    -Need to minimize this time
+    -The question is how to know whether for a given 't' time(x) <= t for any values of x
+    -The inequality implies that for each i |xi-x|/vi then x lies on several i number of segments
+    -If there is an overlap between these segments then we know that the inequality is true
+    -To find overlap maximum of left boundary of segments and minimum of right boundary of segments
+    -EXAMPLE: (quest 7)
+    -Another (quest 8) where function is multivariable but it does not matter
+
+    >Classical O(N) solution: if velocity is 1 (constant) for all then answer is given by average of minimum and maximum of all coordinates
+
+
+GENERAL STRATEGY:
+
+First decide whether search space of problem can be mapped into true ... false and our solution is either last true or first false
+    -Pick one true value from search space and check its left value
+    -Pick one false value from search space and check its right value
+
+Construct a function, that maps search space into true or falses:
+    -
+    -
+
+Do the binary search with left = any true value and right = any false value O(logN * complexity of the bool function)

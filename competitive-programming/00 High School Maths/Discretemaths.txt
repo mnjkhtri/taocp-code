@@ -1,0 +1,29 @@
+1. Binomial numbers:
+    (n,k) : numbers of subsets of size k from a set of n
+
+    Properties: 
+
+    (n,k) = n!/k!(n-k)! [expensive calculation]
+
+    Total subsets in a set of n = 2^n
+
+    No of subsets of size k from a set of n = No of subsets of size n-k from the set of n
+
+    No of subsets of size k from a set of n = (n/k) * No of subsets of size k-1 from the set of n-1
+
+    No of subsets of size k from a set of n + No of subsets of size k+1 from the set of n
+        =No of subsets of size k+1 from a set of size n+1 
+
+
+2. Probability:
+    X = maps probabilty space onto numeric values
+
+    [same space]
+    P(A') = 1 - P(A)
+    P(A or B) = P(A) + P(B) - P(A and B) 
+    P(A and B) = P(A) P(B given A) = P(B) P(A given B)
+
+    
+    E(X) = S xPr(X=x)
+
+
